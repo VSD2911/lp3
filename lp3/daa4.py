@@ -8,7 +8,7 @@ def knapsack_dp(values, weights, capacity):
             if i == 0 or w == 0:
                 dp[i][w] = 0
             elif weights[i - 1] <= w:
-                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1])
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i-1])
             else:
                 dp[i][w] = dp[i - 1][w]
 
@@ -28,17 +28,23 @@ def knapsack_dp(values, weights, capacity):
     return dp[n][capacity], items_in_knapsack
 
 # Example usage
-values = [60, 100, 120]
-weights = [10, 20, 30]
-capacity = 50
+# values = [60, 100, 120]
+# weights = [10, 20, 30]
+# capacity = 50
+values=[1,2,5,6]
+weigths=[2,3,4,5]
+capacity=8
 
 max_value, selected_items = knapsack_dp(values, weights, capacity)
 
-print(f"Maximum value using dynamic programming: {max_value}")
-print("Items selected:")
-for item in selected_items:
-    print(f"Value: {values[item]}, Weight: {weights[item]}")
-
+# print(f"Maximum value using dynamic programming: {max_value}")
+# print("Items selected:")
+# for item in selected_items:
+#     print(f"Value: {values[item]}, Weight: {weights[item]}")
+print("maximum value= ",max_value)
+print("Items selected in knapsack: ")
+for items in selected_items:
+    print("value: ",values[items]," Weight: ",weights[items])
 
 #BB
 
