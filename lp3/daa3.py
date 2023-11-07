@@ -27,7 +27,7 @@ def fractional_knapsack(items, capacity):
     return knapsack, total_value
 
 # Example usage
-if __name__ == "__main__":
+if _name_ == "_main_":
     items = [
         {'name': 'item1', 'value': 10, 'weight': 2},
         {'name': 'item2', 'value': 5, 'weight': 3},
