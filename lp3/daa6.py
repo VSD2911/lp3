@@ -1,56 +1,56 @@
+# deterministic and randomized
 import random
-import time
-
-# Deterministic Quick Sort
-def deterministic_quick_sort(arr):
-    if len(arr) <= 1:
+def deterministic(arr):
+    if len(arr)<=1:
         return arr
-
-    # Choose the pivot element as the middle element
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
-
-    # Recursively sort the left and right subarrays
-    return deterministic_quick_sort(left) + middle + deterministic_quick_sort(right)
-
-# Randomized Quick Sort
-def randomized_quick_sort(arr):
-    if len(arr) <= 1:
+    pivot=arr[len(arr)//2]
+    left=[x for x in arr if x<pivot]
+    middle=[x for x in arr if x==pivot]
+    right=[x for x in arr if x>pivot]
+    
+    return deterministic(left)+middle+deterministic(right)
+def random_sort(arr):
+    if len(arr)<=1:
         return arr
+    pivot=random.choice(arr)
+    left=[x for x in arr if x< pivot]
+    middle=[x for x in arr if x== pivot]
+    right=[x for x in arr if x> pivot]
+    
+    return random_sort(left)+middle+random_sort(right)
 
-    # Randomly choose a pivot element
-    pivot = random.choice(arr)
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
-
-    # Recursively sort the left and right subarrays
-    return randomized_quick_sort(left) + middle + randomized_quick_sort(right)
-
-# Measure execution time of a sorting algorithm
-def measure_time(sort_function, arr):
-    start_time = time.time()
-    sorted_arr = sort_function(arr)
-    end_time = time.time()
-    return sorted_arr, end_time - start_time
-
-# Generate a random list of integers for testing
-arr = [random.randint(1, 1000) for _ in range(1000)]
-
-# Analyze Deterministic Quick Sort
-det_sorted_arr, det_time = measure_time(deterministic_quick_sort, arr.copy())
-print("Deterministic Quick Sort:")
-print(f"Time taken: {det_time:.6f} seconds")  # Time taken for sorting
-print(f"Is Sorted: {det_sorted_arr == sorted(arr)}")  # Check if the sorting is correct
-
-# Analyze Randomized Quick Sort
-rand_sorted_arr, rand_time = measure_time(randomized_quick_sort, arr.copy())
-print("\nRandomized Quick Sort:")
-print(f"Time taken: {rand_time:.6f} seconds")  # Time taken for sorting
-print(f"Is Sorted: {rand_sorted_arr == sorted(arr)}")  # Check if the sorting is correct
-
+arr=[10,16,8,12,15,6,3,9,5]
+arr1=deterministic(arr)
+print("deterministic:",arr1)
+arr2=random_sort(arr)
+print(arr2)
+def quicksort(arr,low,high):
+    if(low<high):
+        pivot=partition(arr,low,high)
+        quicksort(arr,low,pivot-1)
+        quicksort(arr,pivot+1,high)
+    
+def partition(arr,low,high):
+#     n=len(arr)//2
+    pivot=arr[low]
+#     pivot=arr[len(arr)//2]
+    i=low
+    j=high
+    
+    while i<j:
+        while (arr[i]<pivot):
+            i+=1
+        while(arr[j]>pivot):
+            j-=1
+        if(i<j):
+            arr[i],arr[j]=arr[j],arr[i]
+        else:
+            return j
+            
+n=9
+arr=[10,16,8,12,15,6,3,9,5]
+quicksort(arr,0,n-1)
+print(arr)
 # Time Complexity Analysis:
 # - Deterministic Quick Sort:
 #   - Average-case time complexity: O(n*log(n)) - Pivot strategy divides the list into nearly equal parts.
